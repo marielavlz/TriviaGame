@@ -3,6 +3,7 @@ $(document).ready(function(){
 
     $("#introSection").hide();
     $("#messageSection").hide();
+    //$("#resetButton").hide();
     //Fade in the page elements
     $("#introSection").fadeIn(1000 * 1, function() {
     });
@@ -48,7 +49,7 @@ $(document).ready(function(){
                 unansweredCounter++;
                 clearInterval(myInterval);
                 currentQuestionIndex++;
-                $('#timer').effect("pulsate", {
+                $('#timer').effect("pulsate", function(){
                     times: 25
                 }, 1000 * 5);
                 i = 30;
@@ -227,19 +228,22 @@ $(document).ready(function(){
 
     function resetGame() {
         $('#messageSection').show();
+        $("#resetButton").show();
         $('#questionContainer').hide();
         $('#choices').hide();
         $('#timer').hide()
 
-        $('#gameMessage').append("<h2>You have completed the game!</h2>");
+        $('#gameMessage').append("<h2>You've Done It!</h2>");
         $('#gameMessage').append("<h4>Total Correct: " + correctCounter + "</h4>");
         $('#gameMessage').append("<h4>Total Incorrect: " + incorrectCounter + "</h4>");
         $('#gameMessage').append("<h4>Total Unanswered: " + unansweredCounter + "</h4>");
 
         setTimeout(startTrivia, 1000 * 10);
 
-    }
 
+
+
+    };
 
 
     $("#startButton").on("click", function() {

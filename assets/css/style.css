@@ -20,6 +20,9 @@ body {
 #introSection {
     margin-top: 40px;
     text-align: center;
+    /*background-color: grey;*/
+    background: rgba(0,0,0,.5);
+    padding: 20px;
 }
 
 span{
@@ -38,14 +41,36 @@ span{
     border-radius: 6px;
     border: #fff 4px solid;
     line-height: 45px;
+    width: 150px;
     color: #fff;
-    background-color: grey;
-    padding: 10px;
+    font-size: 18px;
+    background: rgba(0,0,0,.6);
+    padding: 5px;
 }
 
 #startButton:hover {
     color: #f1c40f;
     border: #f1c40f 4px solid;
+}
+
+#resetButton {
+    border-radius: 6px;
+    border: #fff 4px solid;
+    line-height: 45px;
+    width: 150px;
+    color: #fff;
+    font-size: 18px;
+    background: rgba(0,0,0,.6);
+    padding: 5px;
+}
+
+#resetButton:hover {
+    color: #f1c40f;
+    border: #f1c40f 4px solid;
+}
+
+.hidden{
+    display: none;
 }
 
 
@@ -61,11 +86,14 @@ span{
 
 #question {
     font-size: 37px;
+    text-align: center;
+    /*background: rgba(0,0,0,.5);*/
 }
 
 #timer {
     color: #e74c3c;
     font-size: 47px;
+    text-align: center;
 }
 
 
@@ -73,6 +101,7 @@ span{
 
 #choices {
     font-size: 23px;
+    background: rgba(0,0,0,.5);
 }
 
 .pickAnswer {
@@ -89,4 +118,10 @@ span{
 .pickAnswer:hover {
     border: solid 5px #f1c40f;
     cursor: pointer;
+}
+
+/*Game Message*/
+#gameMessage{
+    text-align: center;
+    font-size: 52px;
 }
