@@ -1,200 +1,258 @@
 
 $(document).ready(function(){
 
-//Timer goes here. When the timer runs out, the showResults function displays.
-
-(function() {
-  
-   var myQuestions = [
-    {
-      question: "Who is Jon Snow's father?",
-      answers: {
-        a: "Ned Stark",
-        b: "Rhaegar Targaryen",
-        c: "Robert Baratheon",
-        d: "Jon Arryn"
-      },
-      correctAnswer: "b"
-    },
-    {
-      question: "Who is the girl that accompanied Cersei on her visit to Maggy the Frog?",
-      answers: {
-        a: "Jeyne Westerling",
-        b: "Jeyne Poole",
-        c: "Elia Martell",
-        d: "Melara Hetherspoon"
-      },
-      correctAnswer: "d"
-    },
-    {
-      question: "How many bastard daughters does Oberyn Martell have?",
-      answers: {
-        a: "8",
-        b: "3",
-        c: "4",
-        d: "5"
-      },
-      correctAnswer: "a"
-    },
-    {
-      question: "What are the names of Daenerys's dragons?",
-      answers: {
-        a: "Viserion, Drogon, Rhaegal",
-        b: "Balerion, Drogon, Rhaegal",
-        c: "Balerion, Viserion, Rhaegal",
-        d: "Drogon, Balerion, Viserion"
-      },
-      correctAnswer: "a"
-    },
-    {
-      question: "Who was Hand of the King during Joffrey's reign?",
-      answers: {
-        a: "Tywin Lannister",
-        b: "Tyrion Lannister",
-        c: "Ned Stark",
-        d: "Two of the Above"
-      },
-      correctAnswer: "d"
-    },
-    {
-      question: "Who was the last Targaryen king of Westoros?",
-      answers: {
-        a: "Aemon Targaryen",
-        b: "Aerys Targaryen",
-        c: "Aegon Targaryen",
-        d: "Rhaegar Targaryen"
-      },
-      correctAnswer: "b"
-    }
-  ];
-
-  function buildQuiz() {
-    // store the HTML output
-    var output = [];
-
-    // Store a list of choices for each question.
-    myQuestions.forEach((currentQuestion, questionNumber) => {
-      var answers = [];
-
-      // and for each available answer add an HTML radio button to prevent more than one choice.
-      for (letter in currentQuestion.answers) {
-        answers.push(
-          `<label>
-             <input type="radio" name="question${questionNumber}" value="${letter}">
-              ${letter} :
-              ${currentQuestion.answers[letter]}
-           </label>`
-        );
-      }
-
-      // add this question and its answers to the output
-      output.push(
-        `<div class="slide">
-           <div class="question"> ${currentQuestion.question} </div>
-           <div class="answers"> ${answers.join("")} </div>
-         </div>`
-      );
+    $("#introSection").hide();
+    $("#messageSection").hide();
+    //Fade in the page elements
+    $("#introSection").fadeIn(1000 * 1, function() {
     });
 
-    // combine our output list into one string of HTML and put it on the page
-    quizContainer.innerHTML = output.join("");
-  }
+    $("#questionSpace").hide()
+    var correctCounter = 0,
+        incorrectCounter = 0,
+        unansweredCounter = 0,
+        currentQuestionIndex = 0;
 
-  function showResults() {
-    // gather answer containers from our quiz
-    var answerContainers = quizContainer.querySelectorAll(".answers");
+    //This entire section is not working. Not generating random congrats.
+    var congratsMessages = ['You are a Lord of the Rings master!', 'A Ring of Power for you!', "Tolkien would be proud!"];
 
-    // keep track of user's answers
-    let numCorrect = 0;
-
-    // for each question...
-    myQuestions.forEach((currentQuestion, questionNumber) => {
-      // find selected answer
-      var answerContainer = answerContainers[questionNumber];
-      var selector = `input[name=question${questionNumber}]:checked`;
-      var userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
-      // if answer is correct
-      if (userAnswer === currentQuestion.correctAnswer) {
-        // add to the number of correct answers
-        numCorrect++;
-
-      } else {
-        // if answer is wrong or blank
-        //I should add something here but Idk yet
-      }
-    });
-
-    // show number of correct answers out of total
-    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
-  }
-
-  function showSlide(n) {
-    slides[currentSlide].classList.remove("active-slide");
-    slides[n].classList.add("active-slide");
-    currentSlide = n;
-    
-    if (currentSlide === 0) {
-      previousButton.style.display = "none";
-    } else {
-      previousButton.style.display = "inline-block";
+    function randomNum(x) {
+        var roll = Math.floor(Math.random() * x);
+        return roll;
     }
-    
-    if (currentSlide === slides.length - 1) {
-      nextButton.style.display = "none";
-      submitButton.style.display = "inline-block";
-    } else {
-      nextButton.style.display = "inline-block";
-      submitButton.style.display = "none";
+
+    function randomCongrats() {
+        var messageRoll = randomNum(congratsMessages.length);
     }
-  }
 
-  function showNextSlide() {
-    showSlide(currentSlide + 1);
-  }
+    function countDown() {
+        $('.pickAnswer').click(function() {
+            $(this).data('clicked', true);
+        });
+        var i = 30;
+        var myInterval = setInterval(function() {
 
-  function showPreviousSlide() {
-    showSlide(currentSlide - 1);
-  }
+            if (i < 10) {
+                $('#timerSeconds').html("0" + i);
+                $(".pickAnswer").on("click", function() {
+                    clearInterval(myInterval);
+                })
+            } else {
+                $('#timerSeconds').html(i);
+                $(".pickAnswer").on("click", function() {
+                    clearInterval(myInterval);
+                })
+            }
 
-  var quizContainer = document.getElementById("quiz");
-  var resultsContainer = document.getElementById("results");
-  var submitButton = document.getElementById("submit");
+            if (i === 0) {
+                unansweredCounter++;
+                clearInterval(myInterval);
+                currentQuestionIndex++;
+                $('#timer').effect("pulsate", {
+                    times: 25
+                }, 1000 * 5);
+                i = 30;
+                postQuestion(currentQuestionIndex);
+            } else {
+                i--;
+            }
+        }, 1000);
+    }
 
-  // display quiz right away
-  buildQuiz();
+    var questions = [
+        // question 1
+        {
+            "q": "What is the name of the story Bilbo wrote about his adventures?",
+            "c": [
+              "The Hobbit by Bilbo Baggins", 
+              "The Silmarillion by Bilbo Baggins", 
+              "A Hobbit's Tale by Bilbo Baggins", 
+              "Into the West by Bilbo Baggins"
+            ],
+            "answer": 2
+        },
+        // question 2
+        {
+            "q": "By what name do the Elves call Gandalf?",
+            "c": [
+              "The Grey Pilgrim", 
+              "Incanus", 
+              "Gandalf the Grey",
+              "Mithrandir"
+            ],
+            "answer": 3
+        },
+        // question 3
+        {
+            "q": "What is the name of Aragorn's ring, the Ring of_______?",
+            "c": [
+              "Narya", 
+              "Barahir", 
+              "Nenya",
+              "Vilya"
+            ],
+            "answer": 1
+        },
+        // question 4
+        {
+            "q": "From whom did Elrond recieve his ring of power?",
+            "c": [
+              "Gil Galad", 
+              "Galadriel", 
+              "Luthien",
+              "Aragorn I"
+            ],
+            "answer": 0
+        },
+        // question 5
+        {
+            "q": "Who is the proprietor of the Prancing Pony?",
+            "c": [
+              "Bill Ferny", 
+              "Barliman Butterbur", 
+              "Forlong the Fat",
+              "Tom Pickthorn"
+            ],
+            "answer": 1
+        },
+        // question 6
+        {
+            "q": "Who was the original Dark Lord of Middle-Earth?",
+            "c": [
+              "Sauron", 
+              "Annatar", 
+              "Melkor",
+              "Thuringwithal"
+            ],
+            "answer": 2
+        },
+        // question 7
+        {
+            "q": "How many palantiri where brought to Middle-Earth?",
+            "c": [
+              "3",
+              "5",
+              "7",
+              "9"
+              ],
+            "answer": 2
+        },
+        // question 8
+        {
+            "q": "What were the names of the eagles who rescued Frodo and Sam from Mount Doom?",
+            "c": [
+              "Gwaihir, Landroval, and Meneldor", 
+              "Crebain, Shadowfax, and Brego", 
+              "Gwaihir, Ecthelion, and Idrial",
+              "Golfimbul, Azog, and Stybba"
+            ],
+            "answer": 0
+        },
+        // question 9
+        {
+            "q": "What three swords were found in the Trolls Cave in The Hobbit?",
+            "c": [
+              "Sting, Anduil, and The White Knife of Legolas",
+              "Narsil, Glamdring, and Hadhafang",
+              "Aeglos, Orcrist, and Sting",
+              "Orcrist, Sting, and Glamdring"
+              ],
+            "answer": 3
+        },
+        // question 10
+        {
+            "q": "What is the secret word that opens the Gates of Moria?",
+            "c": [
+              "Belok", 
+              "Mellon", 
+              "Danwaith",
+              "Galad"
+              ],
+            "answer": 1
+        }
+    ];
 
-  var previousButton = document.getElementById("previous");
-  var nextButton = document.getElementById("next");
-  var slides = document.querySelectorAll(".slide");
-  let currentSlide = 0;
 
-  showSlide(0);
+    function postQuestion(n) {
 
-  // on submit, show results
-  //submitButton.addEventListener("click", showResults);
-  //previousButton.addEventListener("click", showPreviousSlide);
-  //nextButton.addEventListener("click", showNextSlide);
+        if (currentQuestionIndex < questions.length) {
+            $('#question').remove();
+            $('.pickAnswer').remove();
+            countDown();
+            $('#questionContainer').append("<div id='question'>" + questions[n].q + "</div>");
+            for (var i = 0; i < questions[n].c.length; i++) {
+                var newDiv = $("<div>");
+                newDiv.addClass("pickAnswer").attr("indexnum", i).text(questions[n].c[i]);
+                $('#choices').append(newDiv);
+            }
 
-  $("#next").on("click", function(){
-    showNextSlide();
-  });
-  $("#previous").on("click", function(){
-    showPreviousSlide();
-  });
-  $("#submit").on("click", function(){
-    showResults();
-  })
-})();
+
+        } else {
+            resetGame();
+        }
+
+        $(".pickAnswer").on("click", function() {
+            var userChoice = $(this).attr('indexnum'); // stored as a string not a number
+            userChoice = parseInt(userChoice);
+
+            // checks if user is correct and tallies the final score
+            if (userChoice === questions[currentQuestionIndex].answer) {
+                correctCounter++;
+                currentQuestionIndex++
+                randomCongrats();
+
+            } else {
+                incorrectCounter++;
+                currentQuestionIndex++;
+
+            }
+            postQuestion(currentQuestionIndex);
+        })
+    }
+
+    function startTrivia() {
+        $('#messageSection').hide();
+        $('#gameMessage').empty()
+        $('#questionContainer').show();
+        $('#choices').show();
+        $("#timer").show();
+        correctCounter = 0;
+        incorrectCounter = 0;
+        unansweredCounter = 0;
+        currentQuestionIndex = 0;
+
+        postQuestion(currentQuestionIndex);
+
+    }
+
+    function resetGame() {
+        $('#messageSection').show();
+        $('#questionContainer').hide();
+        $('#choices').hide();
+        $('#timer').hide()
+
+        $('#gameMessage').append("<h2>You have completed the game!</h2>");
+        $('#gameMessage').append("<h4>Total Correct: " + correctCounter + "</h4>");
+        $('#gameMessage').append("<h4>Total Incorrect: " + incorrectCounter + "</h4>");
+        $('#gameMessage').append("<h4>Total Unanswered: " + unansweredCounter + "</h4>");
+
+        setTimeout(startTrivia, 1000 * 10);
+
+    }
+
+
+
+    $("#startButton").on("click", function() {
+        $("#buttonRow").hide();
+        $("#introCard").remove();
+        $("#timer").append("<span id='timerMinutes'>00</span>:<span id='timerSeconds'>00</span>");
+        $("#questionSpace").show();
+
+        startTrivia();
+
+
+    })
 
 
 });
-
-  //Set a timer to a total of 40 seconds that begins when the page loads
-  //Create a timer object
-  //add the array of questions and choices onto the page with an option to click on any choice.
-  //Once the users select their choices, they click submit.
-  //Upon clicking submit, the answer choices selected are compared to the correct answer choices.
-  //A tally is taken of correct responses and incorrect responses without specifying which question was answered correctly or incorrectly
-  //The results are then displayed at the bottom of the page or somehow whenever
  

@@ -4,53 +4,60 @@
 	<meta charset="UTF-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Game of Thrones Trivia Game!</title>
+	<title> LotR Trivia!</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Tangerine" rel="stylesheet">
 	<!--Bootstrap CSS-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 
-	<div class="row">
-		<div class="col-md-12">
-			<div class="page-header">
-  				<center><img src="assets/images/logo.png"></center>
-  			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-3">
-			<img class="banner-one" src="assets/images/stark.jpg">
-		</div>
-
-		<div class="col-md-6">
-			<div class="jumbotron">
-          		<div class="quiz-container">
-					<div id="quiz"></div>
-				</div>
-				<center>
-					<button id="previous">Previous Question</button>
-					<button id="next">Next Question</button>
-					<br>
-					<button id="submit">Submit Quiz</button>
-					<div id="results"></div>
+	<div class="container">
+        <section id="introSection">
+            <h1 class="center-align" id='header'>The Lord of the Rings Trivia Game</h1>
+            <div class="row" id="introCard">
+                    <div class="center-align">
+                        <span>The One Trivia Game to Rule Them All</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="buttonRow">
+                <div class="col s3 offset-s3 center-align">
+                <center>
+					<button id="startButton">Start Game</button>
 				</center>
-			</div>
-		</div>
+                </div>
+            </div>
+            <!-- QUESTIONS -->
+            <section id="questionSpace" class="container">
+                <div class="row">
+                    <div class="col s12 center-align" id="timer">
+                        <!-- TIME -->
 
-		<div class="col-md-3">
-			<img class="banner-two" src="assets/images/targaryen.jpg">
-		</div>
-	</div>
+                    </div>
+                </div>
+                <div class="row" id="messageSection">
+                    <div class="col s12" id="gameMessage">
 
-	<div class="row">
-		<div class="col-md-12">
-			<div id="results"></div>
-		</div>
-	</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="questionContainer" class="col s12 center-align">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="choices" class="col s8 offset-s2 center-align">
+                        <!-- PUSH QUESTIONS IN <p> -->
+                    </div>
+                </div>
+            </section>
+            <!-- END QUESTIONS -->
+        </section>
+
+    </div>
 
 <script src="assets/javascript/quiz.js"></script>
 </body>
