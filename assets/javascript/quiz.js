@@ -129,7 +129,7 @@ $(document).ready(function(){
         },
         // question 7
         {
-            "q": "How many palantiri where brought to Middle-Earth?",
+            "q": "How many palantiri were brought to Middle-Earth?",
             "c": [
               "3",
               "5",
@@ -170,6 +170,62 @@ $(document).ready(function(){
               "Galad"
               ],
             "answer": 1
+        },
+        // question 11
+        {
+            "q": "Which one is not a son of Feanor?",
+            "c": [
+                "Maehdros",
+                "Celegorm",
+                "Curufin",
+                "Fingon"
+
+            ],
+            "answer": 3
+        },
+        // question 12
+        {
+            "q": "How many ruling queens did the kingdom of Numenor have?",
+            "c": [
+                "3",
+                "2",
+                "4",
+                "7"
+            ],
+            "answer": 0
+        },
+        // question 13
+        {
+            "q": "Telperion and Laurelin were the names of what?",
+            "c": [
+                "Mountains",
+                "Maiar",
+                "Trees",
+                "Noldor Elves"
+            ],
+            "answer": 2
+        },
+        // question 14
+        {
+            "q": "Who is the father of Legolas Greenleaf?",
+            "c": [
+                "Oropher",
+                "Thranduil",
+                "Finarfin",
+                "Celeborn"
+            ],
+            "answer": 1
+        },
+        // question 15
+        {
+            "q": "What were the four groups of Elves?",
+            "c": [
+                "Teleri, Noldor, Iminyar, Sindar",
+                "Noldor, Tatyar, Sindar, Vanyar",
+                "Avari, Vanyar, Noldor, Sindar",
+                "Teleri, Noldor, Vanyar, Avari"
+            ],
+            "answer": 3
         }
     ];
 
