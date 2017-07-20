@@ -285,7 +285,9 @@ $(document).ready(function(){
 
     function resetGame() {
         $('#messageSection').show();
+        $('#buttonRow').show();
         $('#resetButton').show();
+        $('#startButton').hide();
         $('#questionContainer').hide();
         $('#choices').hide();
         $('#timer').hide()
@@ -295,9 +297,9 @@ $(document).ready(function(){
         $('#gameMessage').append("<h4>Total Incorrect: " + incorrectCounter + "</h4>");
         $('#gameMessage').append("<h4>Total Unanswered: " + unansweredCounter + "</h4>");
 
-        setTimeout(startTrivia, 1000 * 10);
+        //setTimeout(startTrivia, 1000 * 10);
 
-
+        
 
 
     };
@@ -312,7 +314,13 @@ $(document).ready(function(){
         startTrivia();
 
 
-    })
+    });
+
+    $("#resetButton").on("click", function() {
+        $("#buttonRow").hide();
+        startTrivia();
+    
+     });
 
 
 });
