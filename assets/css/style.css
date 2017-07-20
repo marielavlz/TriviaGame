@@ -4,11 +4,8 @@ body {
     
 }
 
-#header {
-    color: #fff;
-    font-family: 'Tangerine', cursive;
-    font-size: 115px;
-    text-align: center;
+img {
+    width: 700px;
 }
 
 #introCard {
@@ -78,7 +75,7 @@ span{
 
 #questionSpace {
     color: #fff;
-    margin-top: 40px;
+    margin-top: 30px;
     padding: 10px;
     width: 1000px;
     height: 500px;
