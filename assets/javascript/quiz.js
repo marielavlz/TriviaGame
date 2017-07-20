@@ -3,7 +3,7 @@ $(document).ready(function(){
 
     $("#introSection").hide();
     $("#messageSection").hide();
-    //$("#resetButton").hide();
+    $("#resetButton").hide();
     //Fade in the page elements
     $("#introSection").fadeIn(1000 * 1, function() {
     });
@@ -285,7 +285,7 @@ $(document).ready(function(){
 
     function resetGame() {
         $('#messageSection').show();
-        $("#resetButton").show();
+        $('#resetButton').show();
         $('#questionContainer').hide();
         $('#choices').hide();
         $('#timer').hide()
