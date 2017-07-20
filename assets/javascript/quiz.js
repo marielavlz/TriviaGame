@@ -175,46 +175,46 @@ $(document).ready(function(){
         {
             "q": "Which one is not a son of Feanor?",
             "c": [
-                "Maehdros",
-                "Celegorm",
+                "Fingon",
                 "Curufin",
-                "Fingon"
+                "Maehdros",
+                "Celegorm"
 
             ],
-            "answer": 3
+            "answer": 0
         },
         // question 12
         {
-            "q": "How many ruling queens did the kingdom of Numenor have?",
+            "q": "Who was the first ruling queen of the kingdom of Numenor?",
             "c": [
-                "3",
-                "2",
-                "4",
-                "7"
+                "Tar-Vanimelde",
+                "Tar-Miriel",
+                "Tar-Telperien",
+                "Tar-Ancalime"
             ],
-            "answer": 0
+            "answer": 3
         },
         // question 13
         {
             "q": "Telperion and Laurelin were the names of what?",
             "c": [
                 "Mountains",
-                "Maiar",
                 "Trees",
+                "Maiar",
                 "Noldor Elves"
             ],
-            "answer": 2
+            "answer": 1
         },
         // question 14
         {
             "q": "Who is the father of Legolas Greenleaf?",
             "c": [
-                "Oropher",
                 "Thranduil",
+                "Oropher",
                 "Finarfin",
                 "Celeborn"
             ],
-            "answer": 1
+            "answer": 0
         },
         // question 15
         {
@@ -222,10 +222,11 @@ $(document).ready(function(){
             "c": [
                 "Teleri, Noldor, Iminyar, Sindar",
                 "Noldor, Tatyar, Sindar, Vanyar",
-                "Avari, Vanyar, Noldor, Sindar",
-                "Teleri, Noldor, Vanyar, Avari"
+                "Teleri, Noldor, Vanyar, Avari",
+                "Avari, Vanyar, Noldor, Sindar"
+                
             ],
-            "answer": 3
+            "answer": 2
         }
     ];
 
